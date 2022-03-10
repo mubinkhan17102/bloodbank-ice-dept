@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,10 +23,16 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function(){
     Route::view('donor','donor');
-    Route::view('update', 'update');
-    Route::view('profile', 'profile');
+    
     Route::view('search', 'search');
     Route::get('logout',[AuthController::class, 'logout']);
+
+    //logic for user profile
+    Route::get('profile', [UserController::class, 'profile']);
+    Route::get('update',[UserController::class, 'update']);
+    Route::post('updateuser',[UserController::class, 'updateuser']);
+    Route::post('updatepass', [UserController::class, 'updatepass']);
+    Route::post('delete', [UserController::class, 'delete']);
 });
 
 Route::view('/about', 'about');

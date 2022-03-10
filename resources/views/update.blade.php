@@ -18,51 +18,93 @@
 					<div class="panel panel-default" style="padding: 20px;">
 					
 					<!-- Error Messages -->	
+					@if (Session::has('error'))
+						<div class="alert alert-warning alert-dismissible fade show" role="alert">
+							{{Session::get('error')}}
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					@endif
 
-
-						<form action="" method="post" class="form-group form-container" >
+						<form action="/updateuser" method="post" class="form-group form-container" >
+							@csrf
 							<div class="form-group">
 								<label for="name">Name</label>
-								<input type="text" required name="name" class="form-control" value="">
+								<input type="text" required name="name" class="form-control" 
+								value="{{Session::has('user_name')?Session::get('user_name'):""}}">
 							</div>
 							<div class="form-group">
 					              <label for="name">Blood Group</label><br>
 					              <select class="form-control demo-default" required id="blood_group" name="blood_group" required>
-					                <option value=""> </option>
-					                <option value="A+">A+</option>
-					                <option value="A-">A-</option>
-					                <option value="B+">B+</option>
-					                <option value="B-">B-</option>
-					                <option value="O+">O+</option>
-					                <option value="O-">O+</option>
-					                <option value="AB+">AB+</option>
-					                <option value="AB-">AB-</option>
+					                <option value="A+" 
+										@if (Session::has('use_blood_group'))
+											{{Session::get('user_blood_group')=="A+"?" selected":""}}
+										@endif
+										>A+</option>
+										<option value="A-"
+											@if (Session::has('user_blood_group'))
+												{{Session::get('user_blood_group')=="A-"?" selected":""}}
+											@endif
+										>A-</option>
+										<option value="B+"
+											@if (Session::has('user_blood_group'))
+												{{Session::get('user_blood_group')=="B+"?" selected":""}}
+											@endif
+										>B+</option>
+										<option value="B-"
+											@if (Session::has('user_blood_group'))
+												{{Session::get('user_blood_group')=="B-"?" selected":""}}
+											@endif
+										>B-</option>
+										<option value="O+"
+											@if (Session::has('user_blood_group'))
+												{{Session::get('user_blood_group')=="O+"?" selected":""}}
+											@endif
+										>O+</option>
+										<option value="O-"
+											@if (Session::has('user_blood_group'))
+												{{Session::get('user_blood_group')=="O-"?" selected":""}}
+											@endif
+										>O+</option>
+										<option value="AB+"
+											@if (Session::has('user_blood_group'))
+												{{Session::get('user_blood_group')=="AB+"?" selected":""}}
+											@endif
+										>AB+</option>
+										<option value="AB-"
+											@if (Session::has('user_blood_group'))
+												{{Session::get('user_blood_group')=="AB-"?" selected":""}}
+											@endif
+									>AB-</option>
 					              </select>
 					        </div><!--End form-group-->
 							
-				   <div class="form-group">
-						<label for="fullname">Session</label>
-						 <select class="form-control demo-default" id="session" name="session" required>
-                <option value="">---Select Your Session---</option>
-                <option value="2015-2016">2015-2016</option>
-                <option value="2016-2017">2016-2017</option>
-                <option value="2017-2018">2017-2018</option>
-                <option value="2018-2019">2018-2019</option>
-                <option value="2019-2020">2019-2020</option>
-                <option value="2020-2021">2020-2021</option>
-                <option value="2021-2022">2021-2022</option>
-                
-              </select>
-              
-					</div>
-				    		<div class="form-group">
-				              <label for="contact_no">Contact No</label>
-				              <input type="text" name="contact_no" value="" class="form-control" required pattern="^\d{11}$" title="11 numeric characters only" maxlength="11">
-				            </div><!--End form-group-->
-							
-							
 							<div class="form-group">
-								<button class="btn btn-lg btn-danger center-aligned" type="submit" name="update">Update</button>
+									<label for="fullname">Session</label>
+									<select class="form-control demo-default" id="session" name="session" required>
+										@for ($i = 2015; $i <=2022; $i++)
+										<option value="{{$i."-".$i+1}}" 
+											@if (Session::has('user_session'))
+												{{Session::get('user_session')==($i."-".$i+1)?" selected":""}}
+											@endif
+										>
+											{{$i."-".$i+1}}
+											</option>
+										@endfor		
+							
+									</select>
+							</div>
+							<div class="form-group">
+								<label for="contact_no">Contact No</label>
+								<input type="text" name="contact_no" 
+								value="{{Session::has('user_phone')?Session::get('user_phone'):''}}" 
+								class="form-control" required pattern="^\d{11}$" title="11 numeric characters only" maxlength="11">
+								</div><!--End form-group-->
+							
+							
+								<div class="form-group">
+									<button class="btn btn-lg btn-danger center-aligned" type="submit" name="update">Update</button>
 							</div>
 						</form>
 					</div>
@@ -71,10 +113,18 @@
 					<div class="panel panel-default" style="padding: 20px;">
 					
 
-					<!-- Messages -->	
+					<!-- Messages -->
+					@if (Session::has('update'))
+						<div class="alert alert-warning alert-dismissible fade show" role="alert">
+							{{Session::get('update')}}
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					@endif	
 
-						<form action="" method="post" class="form-group form-container" >
-							
+						<form action="updatepass" method="post" class="form-group form-container" >
+							@csrf
 							<div class="form-group">
 								<label for="oldpassword">Current Password</label>
 								<input type="password" required name="old_password" placeholder="Current Password" class="form-control">
@@ -98,10 +148,18 @@
 				<div class="card col-md-6 offset-md-3">
 					
 					<!-- Display Message -->
+					@if (Session::has('error'))
+						<div class="alert alert-warning alert-dismissible fade show" role="alert">
+							{{Session::get('error')}}
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					@endif	
 
 					<div class="panel panel-default" style="padding: 20px;">
-						<form action="" method="post" class="form-group form-container" >
-							
+						<form action="/delete" method="post" class="form-group form-container" >
+							@csrf
 							<div class="form-group">
 								<label for="oldpassword">Password</label>
 								<input type="password" required name="account_password" placeholder="Current Password" class="form-control">

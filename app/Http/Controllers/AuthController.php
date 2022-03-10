@@ -156,7 +156,12 @@ class AuthController extends Controller
         $id = $user['id'];
         if($id){
             if(Auth::loginUsingId($id)){
+                $req->session()->put('user_blood_group', $blood_group);
+                $req->session()->put('user_id', $user['id']);
                 $req->session()->put('user_name',$user['name']);
+                $req->session()->put('user_birth_day',$user['birth_day']);
+                $req->session()->put('user_session',$user['session']);
+                $req->session()->put('user_phone',$user['phone']);
                 return redirect('/');
             }
         }
@@ -172,7 +177,12 @@ class AuthController extends Controller
         if($user){
             if(Hash::check($pass,$user['password'])){
                 if(Auth::loginUsingId($user['id'])){
+                    $req->session()->put('user_blood_group', $user['blood_group']);
+                    $req->session()->put('user_id', $user['id']);
                     $req->session()->put('user_name',$user['name']);
+                    $req->session()->put('user_birth_day',$user['birth_day']);
+                    $req->session()->put('user_session',$user['session']);
+                    $req->session()->put('user_phone',$user['phone']);
                     return redirect('/');
                 }
             }
