@@ -122,9 +122,9 @@ box-shadow: 0px 2px 5px -2px rgba(89,89,89,0.95);
 				    <div class="form-inline">
               <label for="name">Date of Birth</label><br>
               <select class="form-control demo-default" id="date" name="date" style="margin-bottom:10px;" required>
-                <option value="">---Date---</option>
+                <option value="">---Day---</option>
 				@for ($i = 1; $i <=31; $i++)
-					<option value="{{$i}}" 
+					<option value="{{$i<10?"0".$i:$i}}" 
 						@if (Session::has('day'))
 							{{Session::get('day')==$i?" selected":""}}
 						@endif
@@ -201,7 +201,7 @@ box-shadow: 0px 2px 5px -2px rgba(89,89,89,0.95);
               </select>
               <select class="form-control demo-default" id="year" name="year" style="margin-bottom:10px;" required>
                 <option value="">---Year---</option>
-                @for ($i = 1957; $i <=2008; $i++)
+                @for ($i = 1957; $i <=2022; $i++)
 					<option value="{{$i}}" 
 						@if (Session::has('year'))
 							{{Session::get('year')==$i?" selected":""}}

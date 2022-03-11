@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function(){
     //Route for donors
     Route::get('donor',[DonorController::class, 'default_donor']);
     Route::post('donor', [DonorController::class, 'donor']);
+    Route::post('lastdonate', [DonorController::class, 'lastdonate']);
 });
 
 Route::view('/about', 'about');
