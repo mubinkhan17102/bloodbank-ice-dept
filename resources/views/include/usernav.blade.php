@@ -30,7 +30,7 @@
                     {{Session::get('user_name')}}
                 @endif
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                 
                 <a class="dropdown-item" href="{{url('profile')}}"><i class="fa fa-user" aria-hidden="true"></i>Profile</a>
       

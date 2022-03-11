@@ -65,8 +65,44 @@
 <div class="container" style="padding: 60px 0;">
 	<div class="row data">
 		
-
-
+		<table class="table">
+			<thead style=" background-color : #e74c3c;color:aliceblues">
+			  <tr>
+				<th scope="col">#</th>
+				<th scope="col">Name</th>
+				<th scope="col">Blood Group</th>
+				<th scope="col">Gender</th>
+				<th scope="col">Phone</th>
+				<th scope="col">Session</th>
+				<th scope="col">Birth Day</th>
+				<th scope="col">Last Donate</th>
+				<th scope="col">Total Donate</th>
+			  </tr>
+			</thead>
+			<tbody>
+			@if (sizeof($donors)!=0)
+				@foreach($donors as $donor)
+					<tr>
+						<th scope="row">1</th>
+						<td>{{$donor->name}}</td>
+						<td>{{$donor->blood_group}}</td>
+						<td>{{$donor->gender}}</td>
+						<td>{{$donor->phone}}</td>
+						<td>{{$donor->session}}</td>
+						<td>{{$donor->birth_day}}</td>
+						<td>{{$donor->last_donate}}</td>
+						<td>{{$donor->total_donate}}</td>
+					</tr>
+				@endforeach
+			@else
+			<div class="container-fluid">
+				<div class="alert alert-info" role="alert">
+					No donor exist for this blood group.
+				</div>
+			</div>
+			@endif
+			</tbody>
+		  </table>
 	</div>
 </div>
 <div class="loader" id="wait">

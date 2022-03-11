@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DonorController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Client\Request;
@@ -22,7 +23,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function(){
-    Route::view('donor','donor');
+    
     
     Route::view('search', 'search');
     Route::get('logout',[AuthController::class, 'logout']);
@@ -33,6 +34,10 @@ Route::middleware(['auth'])->group(function(){
     Route::post('updateuser',[UserController::class, 'updateuser']);
     Route::post('updatepass', [UserController::class, 'updatepass']);
     Route::post('delete', [UserController::class, 'delete']);
+
+    //Route for donors
+    Route::get('donor',[DonorController::class, 'default_donor']);
+    Route::post('donor', [DonorController::class, 'donor']);
 });
 
 Route::view('/about', 'about');

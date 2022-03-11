@@ -52,25 +52,28 @@
 		padding: 20px 10px 20px 30px;
 	}
 </style>
+			<h2 style="text-align: center; color:#e74c3c;font-wight:bold;margin-top:40px"> Search a Donor</h2>
+				<form action="/donor" method="post" style="margin-top:20px">
+					@csrf
+					<div class="form-group center-aligned">
+						<select name="blood_group" id="blood_group" style="padding: 0 20px; width: 220px; height: 45px;margin-bottom:20px" class="form-control demo-default text-center margin10px">
 
-							<div class="form-group center-aligned">
-								<select name="blood_group" id="blood_group" style="padding: 0 20px; width: 220px; height: 45px;" class="form-control demo-default text-center margin10px">
+							<option value="A+">A+</option>
+							<option value="A-">A-</option>
+							<option value="B+">B+</option>
+							<option value="B-">B-</option>
+							<option value="AB+">AB+</option>
+							<option value="AB-">AB-</option>
+							<option value="O+">O+</option>
+							<option value="O-">O-</option>
 
-									<option value="A+">A+</option>
-									<option value="A-">A-</option>
-									<option value="B+">B+</option>
-									<option value="B-">B-</option>
-									<option value="AB+">AB+</option>
-									<option value="AB-">AB-</option>
-									<option value="O+">O+</option>
-									<option value="O-">O-</option>
-
-								</select>
-							</div>
-							<div class="form-group center-aligned">
-								<button type="button" class="btn btn-lg btn-default" id="search">Search</button>
-							</div>
-						</div>
+						</select>
+					</div>
+					<div class="form-group center-aligned">
+						<input type="submit" value="Search" class="btn btn-lg btn-default" id="search">
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
